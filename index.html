@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>তোমার জন্য</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&family=Nunito:wght@300..900&family=Baloo+Da+2:wght@500..800&family=Noto+Sans+Bengali:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="canvas-particles"></canvas>
+    <div class="ambient-hearts-container" id="ambient-hearts"></div>
+
+    <main class="app-container">
+        <!-- STEP 1: Welcome -->
+        <section id="step-1" class="step-section active">
+            <div class="card glassmorphic welcome-card">
+                <div class="cartoon-container">
+                    <svg viewBox="0 0 200 200" class="cute-bunny" aria-label="Cute animated bunny waving">
+                        <path class="bunny-ear ear-left" d="M75,60 C65,20 85,15 90,60" fill="#FFF" stroke="#FFD1DC" stroke-width="3" />
+                        <path class="bunny-ear-inner ear-left-inner" d="M78,55 C70,28 82,25 87,55" fill="#FFD1DC" />
+                        <path class="bunny-ear ear-right" d="M125,60 C135,20 115,15 110,60" fill="#FFF" stroke="#FFD1DC" stroke-width="3" />
+                        <path class="bunny-ear-inner ear-right-inner" d="M122,55 C130,28 118,25 113,55" fill="#FFD1DC" />
+                        <path class="bunny-body" d="M60,160 C60,110 140,110 140,160 Z" fill="#FFF" stroke="#E0D7D7" stroke-width="1" />
+                        <path class="bunny-tie" d="M90,122 L110,122 L100,128 Z" fill="#FF8DA1" />
+                        <circle class="bunny-head" cx="100" cy="100" r="45" fill="#FFF" stroke="#E0D7D7" stroke-width="1" />
+                        <g class="bunny-eyes">
+                            <circle class="bunny-eye eye-left" cx="85" cy="95" r="5" fill="#2d2d2d" />
+                            <circle class="eye-pupil left-pupil" cx="83.5" cy="93.5" r="1.5" fill="#FFF" />
+                            <circle class="bunny-eye eye-right" cx="115" cy="95" r="5" fill="#2d2d2d" />
+                            <circle class="eye-pupil right-pupil" cx="113.5" cy="93.5" r="1.5" fill="#FFF" />
+                        </g>
+                        <ellipse class="bunny-blush blush-left" cx="77" cy="104" rx="6" ry="4" fill="#FFB2C1" opacity="0.8" />
+                        <ellipse class="bunny-blush blush-right" cx="123" cy="104" rx="6" ry="4" fill="#FFB2C1" opacity="0.8" />
+                        <path class="bunny-mouth" d="M96,105 C96,108 99,109 100,107 C101,109 104,108 104,105" fill="none" stroke="#2d2d2d" stroke-width="2.5" stroke-linecap="round" />
+                        <polygon class="bunny-nose" points="98,101 102,101 100,103" fill="#FF8DA1" />
+                        <g class="bunny-arm-waving">
+                            <path class="bunny-arm" d="M60,125 C45,115 40,95 50,90 C58,85 68,105 60,125 Z" fill="#FFF" stroke="#E0D7D7" stroke-width="1" />
+                            <ellipse cx="50" cy="98" rx="4" ry="5" fill="#FFD1DC" transform="rotate(-30 50 98)" />
+                        </g>
+                        <path class="bunny-arm-static" d="M140,125 C155,130 160,115 150,110 C140,105 135,115 140,125 Z" fill="#FFF" stroke="#E0D7D7" stroke-width="1" />
+                    </svg>
+                    <div class="speech-bubble">হ্যালো জানু!
+                        <svg class="inline-icon" viewBox="0 0 24 24" width="18" height="18"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#FF5E7E"/></svg>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <h1 class="welcome-title">তোমার জন্য একটা ছোট্ট গল্প লুকিয়ে আছে...</h1>
+                    <p class="welcome-subtitle">একটু সময় দেবে আমাকে?
+                        <svg class="inline-icon icon-moon" viewBox="0 0 24 24" width="16" height="16"><path d="M12,2C6.5,2 2,6.5 2,12s4.5,10 10,10 10-4.5 10-10c0-.5 0-1-.1-1.5C20.6,12.4 18.4,14 15.8,14c-3.5,0-6.3-2.8-6.3-6.3C9.5,5.3 10.6,3.3 12.3,2.1 12.2,2 12.1,2 12,2z" fill="#FFD700"/></svg>
+                    </p>
+                    <button class="btn primary-btn pulse-anim" id="btn-start">
+                        <span>চলো শুরু করি</span>
+                        <svg class="heart-icon" viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 2: Story Cards -->
+        <section id="step-2" class="step-section">
+            <div class="section-header">
+                <h2>তোমার-আমার গল্প
+                    <svg class="inline-icon icon-flower" viewBox="0 0 32 32" width="22" height="22">
+                        <circle cx="16" cy="16" r="5" fill="#FFD700"/>
+                        <ellipse cx="16" cy="6" rx="4" ry="6" fill="#FFB2C1"/>
+                        <ellipse cx="16" cy="26" rx="4" ry="6" fill="#FFB2C1"/>
+                        <ellipse cx="6" cy="16" rx="6" ry="4" fill="#FFB2C1"/>
+                        <ellipse cx="26" cy="16" rx="6" ry="4" fill="#FFB2C1"/>
+                        <ellipse cx="8.8" cy="8.8" rx="4" ry="6" fill="#FFD1DC" transform="rotate(-45 8.8 8.8)"/>
+                        <ellipse cx="23.2" cy="8.8" rx="4" ry="6" fill="#FFD1DC" transform="rotate(45 23.2 8.8)"/>
+                        <ellipse cx="8.8" cy="23.2" rx="4" ry="6" fill="#FFD1DC" transform="rotate(45 8.8 23.2)"/>
+                        <ellipse cx="23.2" cy="23.2" rx="4" ry="6" fill="#FFD1DC" transform="rotate(-45 23.2 23.2)"/>
+                    </svg>
+                </h2>
+                <p class="swipe-hint">একটু সোয়াইপ করো, স্মৃতিগুলো দেখো...</p>
+            </div>
+
+            <div class="story-cards-container">
+                <!-- Card 4 -->
+                <div class="story-card" data-index="3">
+                    <div class="card-inner polaroid-style">
+                        <div class="polaroid-photo"><img src="card-4.jpg" alt="Our best memory"></div>
+                        <div class="polaroid-content">
+                            <h3>সবচেয়ে সুন্দর কথাটা?</h3>
+                            <p class="card-text bilingual">
+                                <span class="bn-line">তোমার সাথে কাটানো প্রতিটা মুহূর্ত আমার কাছে একটা উপহার। কিন্তু আরেকটা surprise বাকি আছে তোমার জন্য...</span>
+                                <span class="en-line">Every heartbeat beside you feels like a gift I never deserved. But there's still one more surprise waiting...</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-number">4 / 4</span>
+                            <button class="btn card-btn" id="btn-to-mystery">
+                                Surprise দেখো
+                                <svg class="inline-icon" viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="10" width="18" height="11" rx="2" fill="#FF8DA1" stroke="#FF5E7E" stroke-width="1.5"/><rect x="10" y="10" width="4" height="11" fill="#FFF"/><rect x="1" y="8" width="22" height="5" rx="2" fill="#FFB2C1" stroke="#FF5E7E" stroke-width="1.5"/><rect x="10" y="8" width="4" height="5" fill="#FFF"/><path d="M12,8 C10,4 6,4 6,6.5C6,8 8,8 12,8Z" fill="#FFF" stroke="#FF5E7E" stroke-width="1"/><path d="M12,8 C14,4 18,4 18,6.5C18,8 16,8 12,8Z" fill="#FFF" stroke="#FF5E7E" stroke-width="1"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="story-card" data-index="2">
+                    <div class="card-inner polaroid-style">
+                        <div class="polaroid-photo"><img src="card-3.jpg" alt="Your beautiful smile"></div>
+                        <div class="polaroid-content">
+                            <h3>তোমার হাসি
+                                <svg class="inline-icon icon-flower-sm" viewBox="0 0 32 32" width="18" height="18">
+                                    <circle cx="16" cy="16" r="4" fill="#FFD700"/>
+                                    <ellipse cx="16" cy="7" rx="3.5" ry="5" fill="#FFB2C1"/>
+                                    <ellipse cx="16" cy="25" rx="3.5" ry="5" fill="#FFB2C1"/>
+                                    <ellipse cx="7" cy="16" rx="5" ry="3.5" fill="#FFB2C1"/>
+                                    <ellipse cx="25" cy="16" rx="5" ry="3.5" fill="#FFB2C1"/>
+                                </svg>
+                            </h3>
+                            <p class="card-text bilingual">
+                                <span class="bn-line">তোমার হাসি দেখলে মনে হয়, পৃথিবীর সব সুন্দর কিছু একসাথে ফুটে উঠেছে।<br>তুমি হাসলে আমার ভেতরে একটা আলো জ্বলে ওঠে, যেটা আর কেউ জ্বালাতে পারে না।</span>
+                                <span class="en-line">When you smile, it feels like every beautiful thing in the world blooms at once.<br>A light stirs inside me that no one else could ever ignite.</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-number">3 / 4</span>
+                            <button class="btn card-btn-next">পরের স্মৃতি
+                                <svg class="inline-icon" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" fill="currentColor"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="story-card" data-index="1">
+                    <div class="card-inner polaroid-style">
+                        <div class="polaroid-photo"><img src="card-2.jpg" alt="Laughter and comfort"></div>
+                        <div class="polaroid-content">
+                            <h3>হাসি আর উষ্ণতা</h3>
+                            <p class="card-text bilingual">
+                                <span class="bn-line">তোমার সাথে হাসতে হাসতে চোখ ভিজে যায়, আবার চুপচাপ পাশে বসে থাকলেও মনে হয় সবকিছু ঠিক আছে।<br>এমন কাউকে পাওয়াটাই তো সবচেয়ে বড় পাওয়া।</span>
+                                <span class="en-line">With you, laughter brings tears of joy — and even silence feels like home.<br>Finding someone like you is the greatest thing that ever happened to me.</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-number">2 / 4</span>
+                            <button class="btn card-btn-next">পরের স্মৃতি
+                                <svg class="inline-icon" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" fill="currentColor"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 1 -->
+                <div class="story-card" data-index="0">
+                    <div class="card-inner polaroid-style">
+                        <div class="polaroid-photo"><img src="card-bg.jpg" alt="How it started"></div>
+                        <div class="polaroid-content">
+                            <h3>যেভাবে শুরু হলো</h3>
+                            <p class="card-text bilingual">
+                                <span class="bn-line">তুমি আসার আগে জীবনটা ছিল সাদাকালো ছবির মতো।<br>তুমি এসে সেই ছবিতে রঙ লাগিয়ে দিলে — আর তারপর থেকে সব বদলে গেলো।</span>
+                                <span class="en-line">Before you, life felt like a black-and-white photograph.<br>You walked in and painted it with every colour I never knew existed.</span>
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-number">1 / 4</span>
+                            <button class="btn card-btn-next">পরের স্মৃতি
+                                <svg class="inline-icon" viewBox="0 0 24 24" width="14" height="14"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" fill="currentColor"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-controls">
+                <button class="nav-arrow" id="prev-card" aria-label="Previous memory" disabled>
+                    <svg viewBox="0 0 24 24"><path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z"/></svg>
+                </button>
+                <div class="dots-indicator">
+                    <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+                <button class="nav-arrow" id="next-card" aria-label="Next memory">
+                    <svg viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 3: Mystery Box -->
+        <section id="step-3" class="step-section">
+            <div class="card glassmorphic mystery-card">
+                <div class="mystery-container">
+                    <div class="mystery-box-wrapper" id="mystery-box-trigger">
+                        <svg viewBox="0 0 200 200" class="mystery-svg" id="mystery-svg">
+                            <defs>
+                                <radialGradient id="box-glow" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#FFF" stop-opacity="0.8"/>
+                                    <stop offset="100%" stop-color="#FFD1DC" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                            <circle class="box-glow-circle" cx="100" cy="90" r="50" fill="url(#box-glow)" opacity="0" />
+                            <ellipse cx="100" cy="175" rx="45" ry="8" fill="#e3b4be" opacity="0.5" />
+                            <g class="box-full-container">
+                                <rect class="box-base" x="65" y="105" width="70" height="60" rx="4" fill="#FF8DA1" stroke="#FF5E7E" stroke-width="2" />
+                                <rect x="95" y="105" width="10" height="60" fill="#FFF" />
+                                <g class="box-lid-group">
+                                    <path class="box-bow bow-left" d="M96,93 C80,80 82,97 96,97 Z" fill="#FFF" stroke="#FF5E7E" stroke-width="1.5" />
+                                    <path class="box-bow bow-right" d="M104,93 C120,80 118,97 104,97 Z" fill="#FFF" stroke="#FF5E7E" stroke-width="1.5" />
+                                    <circle cx="100" cy="96" r="5" fill="#FFF" stroke="#FF5E7E" stroke-width="1" />
+                                    <rect class="box-lid" x="60" y="97" width="80" height="12" rx="3" fill="#FFB2C1" stroke="#FF5E7E" stroke-width="2" />
+                                    <rect x="95" y="97" width="10" height="12" fill="#FFF" />
+                                </g>
+                            </g>
+                        </svg>
+                        <!-- SVG sparkles instead of emoji -->
+                        <div class="mystery-sparkle sparkle-1"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12,1L9,9L1,12L9,15L12,23L15,15L23,12L15,9Z" fill="#FFD700" opacity="0.9"/></svg></div>
+                        <div class="mystery-sparkle sparkle-2"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#FF5E7E"/></svg></div>
+                        <div class="mystery-sparkle sparkle-3"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12,1L9,9L1,12L9,15L12,23L15,15L23,12L15,9Z" fill="#FFD700" opacity="0.9"/></svg></div>
+                    </div>
+                </div>
+
+                <div class="mystery-content">
+                    <h2 class="mystery-title" id="mystery-instruction">ভেতরে কী লুকিয়ে আছে?
+                        <svg class="inline-icon" viewBox="0 0 24 24" width="20" height="20"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#FFF" stroke="#FF5E7E" stroke-width="1.5"/></svg>
+                    </h2>
+                    <div class="lyrics-container">
+                        <p class="lyrics-text" id="lyrics-text"></p>
+                    </div>
+                    <button class="btn primary-btn pulse-anim" id="btn-open-box">
+                        <span>খুলে দেখো</span>
+                        <!-- Cute envelope SVG -->
+                        <svg class="inline-icon" viewBox="0 0 24 24" width="20" height="20"><rect x="2" y="6" width="20" height="14" rx="3" fill="#FFB2C1" stroke="#FF5E7E" stroke-width="1.5"/><path d="M2,6L12,14L22,6" fill="none" stroke="#FF5E7E" stroke-width="1.5" stroke-linecap="round"/><path d="M12,14L12,11" fill="none" stroke="none"/><path d="M9,10L12,13L15,10" fill="#FFF" stroke="none" opacity="0.5"/></svg>
+                    </button>
+                    <button class="btn secondary-btn hidden" id="btn-mystery-next">
+                        <span>এবার আসল কথা</span>
+                        <svg class="heart-icon" viewBox="0 0 24 24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: Confession -->
+        <section id="step-4" class="step-section">
+            <div class="confession-container">
+                <div class="hearts-burst-wrapper">
+                    <svg viewBox="0 0 24 24" class="glowing-heart-svg">
+                        <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"/>
+                    </svg>
+                </div>
+
+                <h1 class="confession-title" id="confession-text">
+                    <span class="confession-en">I LOVE YOU!</span>
+                    <span class="confession-bn">আমি তোমাকে ভালোবাসি, শুধু তোমাকে
+                        <svg class="inline-icon icon-heart-beat" viewBox="0 0 24 24" width="24" height="24"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="#FF5E7E"/></svg>
+                    </span>
+                </h1>
+
+                <p class="confession-subtitle">
+                    You are the reason my heart learned to beat differently.
+                    <span class="confession-subtitle-bn">তুমি আমার আজ, আমার আগামীকাল, আমার পুরোটা জীবন।</span>
+                </p>
+
+                <div class="proposal-question" id="proposal-question">
+                    <p class="question-text">
+                        তুমি কি আমার হাত ধরে সারাজীবন হাঁটবে?
+                        <svg class="inline-icon icon-ring" viewBox="0 0 24 24" width="22" height="22">
+                            <ellipse cx="12" cy="14" rx="7" ry="7" fill="none" stroke="#FFD700" stroke-width="2.5"/>
+                            <circle cx="12" cy="7" r="3.5" fill="#FFD700" stroke="#FFF" stroke-width="0.5"/>
+                            <circle cx="12" cy="7" r="1.5" fill="#FFF" opacity="0.7"/>
+                        </svg>
+                        <span class="question-en">Will you hold my hand and walk beside me, forever?</span>
+                    </p>
+                    <div class="choice-buttons">
+                        <button class="btn primary-btn choice-accept" id="btn-accept">
+                            <span>হ্যাঁ, রাজি</span>
+                            <svg class="inline-icon" viewBox="0 0 24 24" width="18" height="18"><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" fill="currentColor"/></svg>
+                        </button>
+                        <button class="btn secondary-btn choice-reject" id="btn-reject">
+                            <!-- Cute scared bunny face SVG inside reject button -->
+                            <svg class="reject-bunny" viewBox="0 0 40 40" width="22" height="22">
+                                <circle cx="20" cy="22" r="14" fill="#FFF" stroke="#E0D7D7" stroke-width="1"/>
+                                <ellipse cx="14" cy="20" rx="2.5" ry="3.5" fill="#2d2d2d"/>
+                                <ellipse cx="26" cy="20" rx="2.5" ry="3.5" fill="#2d2d2d"/>
+                                <ellipse cx="13" cy="19" rx="1" ry="1.2" fill="#FFF"/>
+                                <ellipse cx="25" cy="19" rx="1" ry="1.2" fill="#FFF"/>
+                                <ellipse cx="10" cy="25" rx="3" ry="2" fill="#FFB2C1" opacity="0.6"/>
+                                <ellipse cx="30" cy="25" rx="3" ry="2" fill="#FFB2C1" opacity="0.6"/>
+                                <path d="M17,27 Q20,30 23,27" fill="none" stroke="#2d2d2d" stroke-width="1.5" stroke-linecap="round"/>
+                                <path d="M14,8 C12,1 17,1 17,8" fill="#FFF" stroke="#FFD1DC" stroke-width="1.5"/>
+                                <path d="M26,8 C28,1 23,1 23,8" fill="#FFF" stroke="#FFD1DC" stroke-width="1.5"/>
+                            </svg>
+                            <span>না</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="yes-message hidden" id="yes-message">
+                    <!-- Cute celebration SVG -->
+                    <div class="yes-cartoon">
+                        <svg viewBox="0 0 80 80" width="60" height="60" class="celebrate-icon">
+                            <path d="M40,65L35,55C25,45 15,35 15,25C15,18 20,13 27,13C32,13 36,16 40,20C44,16 48,13 53,13C60,13 65,18 65,25C65,35 55,45 45,55Z" fill="#FF5E7E"/>
+                            <path d="M30,5 L32,12 L25,8 L33,10 L28,3Z" fill="#FFD700"/>
+                            <path d="M55,8 L53,15 L58,10 L52,13 L57,5Z" fill="#FFD700"/>
+                            <path d="M18,15 L22,10 L20,17 L24,12Z" fill="#FFB2C1"/>
+                            <path d="M62,18 L58,12 L60,19 L56,14Z" fill="#FFB2C1"/>
+                            <circle cx="25" cy="3" r="2" fill="#87CEFA"/>
+                            <circle cx="58" cy="5" r="2" fill="#87CEFA"/>
+                            <circle cx="15" cy="12" r="1.5" fill="#D8BFD8"/>
+                            <circle cx="65" cy="10" r="1.5" fill="#D8BFD8"/>
+                        </svg>
+                    </div>
+                    <h2 class="yes-title">তুমি রাজি হয়েছো!</h2>
+                    <p class="yes-subtitle">
+                        আজ থেকে তুমি আমার, আর আমি তোমার — চিরকালের জন্য। প্রতিটা সকাল তোমাকে ভালোবেসে শুরু করব, প্রতিটা রাত তোমাকে ভেবে ঘুমাব।
+                        <svg class="inline-icon icon-moon" viewBox="0 0 24 24" width="16" height="16"><path d="M12,2C6.5,2 2,6.5 2,12s4.5,10 10,10 10-4.5 10-10c0-.5 0-1-.1-1.5C20.6,12.4 18.4,14 15.8,14c-3.5,0-6.3-2.8-6.3-6.3C9.5,5.3 10.6,3.3 12.3,2.1 12.2,2 12.1,2 12,2z" fill="#FFD700"/></svg>
+                        <span class="yes-en">From this moment, you're mine and I'm yours — forever. Every morning begins with loving you, every night ends thinking of you.</span>
+                    </p>
+                </div>
+
+                <button class="btn restart-btn" id="btn-restart">
+                    <svg viewBox="0 0 24 24"><path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/></svg>
+                    <span>আবার দেখো</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+
